@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputEl {
+  width: 400px;
+  padding-top: 20px;
+  margin-top: 10px;
+}
+
+.keyboard {
+  border: 1px solid black;
+  width: 400px;
+  height: 500px;
+  margin-top: 50px;
+}
+
+.btn {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+}
