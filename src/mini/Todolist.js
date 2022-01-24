@@ -4,7 +4,6 @@ import styles from "./Button.module.css";
 function Todolist() {
   // input값 받는 state
   const [toDo, setToDo] = useState("");
-  const onChange = (e) => setToDo(e.target.value);
 
   // input값 배열로 저장하는 state
   const [toDos, setToDos] = useState([]); //todo들을 배열에 넣기위해
@@ -25,11 +24,12 @@ function Todolist() {
     <div className={styles.title}>
       <h1>My Todos ({toDos.length})</h1>
       <form onSubmit={onSubmit}>
+        {/*(e) => onSubmit(e)  이렇게 쓰는거랑 같음.*/}
         <input
           type="text"
           placeholder="Write to do"
           value={toDo}
-          onChange={onChange}
+          onChange={(e) => setToDo(e.target.value)}
         />
         <button>Add To Do</button>
       </form>
@@ -44,6 +44,11 @@ function Todolist() {
           </li>
         ))}
         {/*각 리스트에 고유의 프로퍼티 key를 줘야 함 */}
+        {/* 질문2) onClick={onClick} 실행시 onClick함수에 매개변수를 넘겨주는 법
+            : onClick={onClick(el)} 이렇게 하면 onClick()이 "클릭하기 전에 실행되서 실행된 결과인 "undefined"가 들어감."
+            : 따라서 "클릭했을떄 온클릭 함수가 실행"되기 위해 온클릭함수를 익명함수를 통해 써야 함.
+            : onClick={()=>onClick(el)} <-클릭시 익명함수가 실행되서 온클릭함수가 실행되게 됨.
+       */}
       </ul>
     </div>
   );

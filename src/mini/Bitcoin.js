@@ -14,9 +14,11 @@ function Bitcoin() {
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);
+
         setCoins(result);
       });
-    // 질문1) 여기서 false로 바꾸면 왜 이상한지??
+
+    // 질문1) 여기서 false로 바꾸면 api 응답오기 전에 이미 실행되버림 <- fetch코드와 별개로 먼저 실행되게 됨.
   }, []);
 
   return (

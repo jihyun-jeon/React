@@ -18,7 +18,7 @@ function PracticeApp() {
 
   const onSelect = (e) => setDal(() => e.target.value);
   const onWrite = (e) => setHaveDal(() => e.target.value);
-
+  //
   return (
     <div>
       <h1>The Coins! </h1>
