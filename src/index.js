@@ -13,6 +13,7 @@ import Bitcoin from "./mini/Bitcoin";
 import MovieApp from "./Movie/MovieApp";
 import DiceApp from "./Dice/DiceApp";
 import { LoanApp } from "./Loan/LoanApp";
+import Button from "./mini/Button";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
     {/* <Uses /> */}
     {/* <DiceApp /> */}
     {/* <LoanApp /> */}
+    {/* <Button text="write text" /> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

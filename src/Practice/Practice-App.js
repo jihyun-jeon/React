@@ -1,51 +1,51 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 
-function PracticeApp() {
-  const [load, setLoad] = useState(true);
-  const [data, setData] = useState([]);
-  const [dal, setDal] = useState(0);
-  const [haveDal, setHaveDal] = useState(0);
+function Bitcoin() {
+  //1.
+  const [show, setShow] = useState(true);
+  const [coins, setCoins] = useState([]);
+
+  //2.
+  const [OptionV, setOptionV] = useState("");
+  const [inputV, setInputV] = useState(0);
+  const optionChange = (e) => setOptionV(() => e.target.value);
+  const onInput = (e) => setInputV(e.target.value);
 
   useEffect(() => {
     fetch("https://api.coinpaprika.com/v1/tickers")
       .then((res) => res.json())
       .then((result) => {
-        setData(() => result);
-        setLoad((cur) => !cur);
+        setCoins(result.slice(0, 11));
+        setShow((cur) => !cur);
       });
   }, []);
 
-  const onSelect = (e) => setDal(() => e.target.value);
-  const onWrite = (e) => setHaveDal(() => e.target.value);
-  //
   return (
-    <div>
-      <h1>The Coins! </h1>
-      {load ? (
-        "Loading..."
+    <>
+      {show ? (
+        <h1>Loading...</h1>
       ) : (
         <>
-          <select onChange={onSelect}>
-            <option>choice!</option>
-            {data.map((el) => (
+          <h1>The Coins!</h1>
+          <select onChange={optionChange}>
+            <option key="choice" selected>
+              ---------- choice ----------
+            </option>
+            {coins.map((el) => (
               <option key={el.id} value={el.quotes.USD.price}>
-                {el.name}({el.symbol}): ${el.quotes.USD.price} USD
+                {el.name}: ${el.quotes.USD.price} USD
               </option>
             ))}
           </select>
           <hr />
-          <div>
-            you have{" "}
-            <input placeholder="dollar" value={dal} onChange={onWrite} />
-          </div>
-          <div>
-            you can get <span>{Math.floor(haveDal / dal)}</span>개
-          </div>
+          <label for="dollar">you have</label>
+          <input id="dollar" onChange={onInput} />
+          <span>$</span>
+          <div>you can get :{Math.floor(inputV / OptionV)} 개</div>
         </>
       )}
-    </div>
+    </>
   );
 }
 
-export default PracticeApp;
+export default Bitcoin;

@@ -16,7 +16,7 @@ function Home() {
       });
   }, []);
 
-  console.log(movies);
+  // console.log(movies);
   //   console.log(movies.map((el) => <div key={el.id}>{el.title}</div>));
 
   return (

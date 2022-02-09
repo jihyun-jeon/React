@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import PracticeMovie from "./Practice-Movie";
 
 function PracticeHome() {
-  const [showing, setShow] = useState(true);
-  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -12,21 +13,20 @@ function PracticeHome() {
       .then((res) => res.json())
       .then((result) => {
         setData(() => result.data.movies);
-        setShow((prev) => !prev);
-        console.log(data);
+        setLoading((cur) => !cur);
       });
   }, []);
 
   return (
     <div>
-      {showing ? (
-        <h2>Loading...</h2>
+      {loading ? (
+        <h1>Loading...</h1>
       ) : (
         data.map((el) => (
           <PracticeMovie
             key={el.id}
             id={el.id}
-            conerImg={el.medium_cover_image}
+            coverImage={el.medium_cover_image}
             title={el.title}
             summary={el.summary}
             genres={el.genres}

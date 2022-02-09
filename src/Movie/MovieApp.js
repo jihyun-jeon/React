@@ -26,6 +26,7 @@ function MovieApp() {
       {/*Router가 해당 경로일때 그 컴포넌트를 보여줌 */}
       {/*사용자의 url주소에 따라 어떤 페이지를 렌더할지 결정됨
         (유저의 경로가"/"이면 home일때, "/movie"이면 홈에서 나아가 다른 경로일떄) */}
+      {/*Routes(구 switch):하나의 route에 하나의 경로만 보여주게 됨. */}
       <Routes>
         {/*Route: url를 의미 */}
         {/*Route 컴포넌트 쓸때만! path에 ":변수"를 쓸 수 있음. 이후 Detail함수에서 useParms로 이 변수를 가져올 수 있음*/}
