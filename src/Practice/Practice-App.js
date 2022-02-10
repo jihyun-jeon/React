@@ -1,51 +1,32 @@
-import { useEffect, useState } from "react/cjs/react.development";
+import { useState } from "react/cjs/react.development";
 
-function Bitcoin() {
-  //1.
-  const [show, setShow] = useState(true);
-  const [coins, setCoins] = useState([]);
+function PracticeApp() {
+  const [todo, setTodo] = useState("");
+  const onTodo = (e) => setTodo(() => e.target.value);
 
-  //2.
-  const [OptionV, setOptionV] = useState("");
-  const [inputV, setInputV] = useState(0);
-  const optionChange = (e) => setOptionV(() => e.target.value);
-  const onInput = (e) => setInputV(e.target.value);
-
-  useEffect(() => {
-    fetch("https://api.coinpaprika.com/v1/tickers")
-      .then((res) => res.json())
-      .then((result) => {
-        setCoins(result.slice(0, 11));
-        setShow((cur) => !cur);
-      });
-  }, []);
+  const [todos, setTodos] = useState([]);
+  const addBtn = (e) => {
+    e.preventDefault();
+    setTodos((prev) => prev.push({ txt: todo }));
+    console.log(todos);
+  };
 
   return (
     <>
-      {show ? (
-        <h1>Loading...</h1>
-      ) : (
-        <>
-          <h1>The Coins!</h1>
-          <select onChange={optionChange}>
-            <option key="choice" selected>
-              ---------- choice ----------
-            </option>
-            {coins.map((el) => (
-              <option key={el.id} value={el.quotes.USD.price}>
-                {el.name}: ${el.quotes.USD.price} USD
-              </option>
-            ))}
-          </select>
-          <hr />
-          <label for="dollar">you have</label>
-          <input id="dollar" onChange={onInput} />
-          <span>$</span>
-          <div>you can get :{Math.floor(inputV / OptionV)} 개</div>
-        </>
-      )}
+      <h1>My Todos()</h1>
+      <form onSubmit={addBtn}>
+        <input type="text" placeholder="Write to do" onChange={onTodo} />
+        <button type="submit">Add To Do</button>
+      </form>
+      <br />
+      {/* {todos.map(() => (
+        <li>
+          {todos.txt}
+          <button>x</button>
+        </li>
+      ))} */}
     </>
   );
 }
 
-export default Bitcoin;
+export default PracticeApp;
